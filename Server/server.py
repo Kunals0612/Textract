@@ -1,12 +1,14 @@
-import os
+import sys
+from pathlib import Path
 from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 import fitz  # PyMuPDF for handling PDFs
-from groq import Groq
 
-# Initialize the Groq client
-client = Groq(
-    api_key="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",
-)
+# Add the `llama` directory to the Python path
+llama_dir = Path(__file__).resolve().parent.parent / "Llama"
+sys.path.append(str(llama_dir))
+
+# Import the function from `test.py`
+from groq_handler import get_answer_from_llama
 
 # FastAPI app instance
 app = FastAPI()
@@ -31,20 +33,9 @@ async def upload_and_ask(
                 page = doc[page_num]
                 extracted_text += page.get_text("text") + "\n"
 
-        # Generate the chat completion using Groq
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": f"{extracted_text} Based on the above text, {question}",
-                }
-            ],
-            model="llama-3.3-70b-versatile",
-        )
+        # Call the Llama handler to get the answer
+        answer = get_answer_from_llama(extracted_text, question)
 
-        # Get the model's response
-        answer = chat_completion.choices[0].message.content
-        print(answer)
         return {
             "question": question,
             "answer": answer,
