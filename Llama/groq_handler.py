@@ -1,8 +1,13 @@
 from groq import Groq
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+groqkey = os.getenv("GROQ_API_KEY")
 
 # Initialize Groq client
 client = Groq(
-    api_key="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",
+    api_key=groqkey,
 )
 
 def get_answer_from_llama(file_content: str, question: str) -> str:

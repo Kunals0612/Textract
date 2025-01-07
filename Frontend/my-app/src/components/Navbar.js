@@ -32,23 +32,28 @@ function Navbar() {
   };
 
   return (
-    <div className="bg-white shadow-md h-[15vw] flex items-center flex-row gap-[40vw]">
+    <div className="bg-white shadow-md h-[15vw] flex items-center flex-row gap-[10vw]">
       {/* Logo */}
       <img src="/ai.png" className="w-[25vw] m-5" alt="Logo" />
 
       {/* File Upload and Preview */}
       <div className="flex flex-row items-center gap-2 relative">
-        {/* If a file is uploaded, show the file icon to the left of the upload button */}
-        {uploadedFile && (
-          <div className="flex items-center justify-center mr-2">
-            <img
-              src="/file.png" // Replace with your file icon PNG path
-              alt="Uploaded File Icon"
-              className="w-[9vw] h-[9vw] cursor-pointer"
-              onClick={handleFilePreviewClick} // Clicking on the file icon opens the preview
-            />
-          </div>
-        )}
+        {/* File Icon and Name (Fixed Width) */}
+        <div className="flex items-center justify-center w-[35vw]">
+          {uploadedFile && (
+            <>
+              <img
+                src="/file.png" // Replace with your file icon PNG path
+                alt="Uploaded File Icon"
+                className="w-[7vw] h-[7vw] cursor-pointer"
+                onClick={handleFilePreviewClick} // Clicking on the file icon opens the preview
+              />
+              <span className="ml-2 text-sm text-green-500 truncate">
+                {uploadedFile.name}
+              </span>
+            </>
+          )}
+        </div>
 
         {/* Upload Button */}
         <button
