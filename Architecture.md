@@ -1,2 +1,2 @@
 # Architecture
-![AIPlanet](https://github.com/user-attachments/assets/dc1c73ec-dc68-4012-9be6-bba6a54b74f3)
+![AIPlanet](https://github.com/user-attachments/assets/f63b06f6-b202-4d67-a9bc-a7305bb00120)
